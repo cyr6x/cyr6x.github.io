@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyril Baaya | Cybersecurity Portfolio</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',sans-serif;background:#0d1117;color:#e6edf3;}
+a{color:#58a6ff;text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* NAV */
+nav{background:#161b22;border-bottom:1px solid #30363d;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
+nav .logo{font-size:1.2rem;font-weight:700;color:#58a6ff;}
+nav ul{list-style:none;display:flex;gap:24px;}
+nav ul li a{color:#e6edf3;font-size:.9rem;}
+nav ul li a:hover{color:#58a6ff;text-decoration:none;}
+
+/* HERO */
+.hero{padding:80px 40px 60px;max-width:900px;margin:0 auto;text-align:center;}
+.hero .badge{display:inline-block;background:#21262d;border:1px solid #30363d;border-radius:20px;padding:6px 16px;font-size:.8rem;color:#8b949e;margin-bottom:24px;}
+.hero h1{font-size:3rem;font-weight:700;line-height:1.2;margin-bottom:16px;}
+.hero h1 span{color:#58a6ff;}
+.hero p{font-size:1.1rem;color:#8b949e;max-width:620px;margin:0 auto 32px;line-height:1.7;}
+.hero .btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.btn{padding:10px 24px;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;transition:.2s;}
+.btn-primary{background:#238636;color:#fff;border:1px solid #2ea043;}
+.btn-primary:hover{background:#2ea043;text-decoration:none;}
+.btn-secondary{background:transparent;color:#58a6ff;border:1px solid #30363d;}
+.btn-secondary:hover{background:#21262d;text-decoration:none;}
+.status-dot{display:inline-block;width:8px;height:8px;background:#3fb950;border-radius:50%;margin-right:6px;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+
+/* ABOUT */
+.section{padding:60px 40px;max-width:900px;margin:0 auto;}
+.section h2{font-size:1.5rem;font-weight:700;margin-bottom:32px;padding-bottom:12px;border-bottom:1px solid #21262d;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+.about-card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:24px;}
+.about-card h3{font-size:1rem;color:#58a6ff;margin-bottom:12px;}
+.about-card p,.about-card li{font-size:.9rem;color:#8b949e;line-height:1.7;}
+.about-card ul{padding-left:16px;}
+
+/* SKILLS */
+.skills-grid{display:flex;flex-wrap:wrap;gap:10px;}
+.skill-tag{background:#21262d;border:1px solid #30363d;border-radius:20px;padding:6px 14px;font-size:.8rem;color:#e6edf3;}
+.skill-tag.green{border-color:#2ea043;color:#3fb950;}
+.skill-tag.blue{border-color:#1f6feb;color:#58a6ff;}
+.skill-tag.orange{border-color:#9e6a03;color:#d29922;}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.project-card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:24px;transition:.2s;}
+.project-card:hover{border-color:#58a6ff;transform:translateY(-2px);}
+.project-card .tag{display:inline-block;background:#21262d;border-radius:4px;padding:2px 8px;font-size:.75rem;color:#8b949e;margin-bottom:12px;}
+.project-card h3{font-size:1rem;font-weight:700;margin-bottom:8px;}
+.project-card p{font-size:.85rem;color:#8b949e;line-height:1.6;margin-bottom:16px;}
+.project-card .tech{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+.project-card .tech span{background:#0d1117;border:1px solid #30363d;border-radius:4px;padding:2px 8px;font-size:.75rem;color:#8b949e;}
+.project-card .links{display:flex;gap:12px;}
+.project-card .links a{font-size:.85rem;color:#58a6ff;}
+
+/* LABS */
+.labs-list{display:flex;flex-direction:column;gap:12px;}
+.lab-item{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;}
+.lab-item:hover{border-color:#3fb950;}
+.lab-item .lab-info h3{font-size:.95rem;font-weight:600;margin-bottom:4px;}
+.lab-item .lab-info p{font-size:.83rem;color:#8b949e;}
+.lab-item .lab-badge{background:#0d4429;color:#3fb950;border:1px solid #2ea043;border-radius:20px;padding:4px 12px;font-size:.75rem;white-space:nowrap;}
+
+/* CERTS */
+.certs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.cert-card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:20px;text-align:center;}
+.cert-card .icon{font-size:2rem;margin-bottom:8px;}
+.cert-card h3{font-size:.9rem;font-weight:700;margin-bottom:4px;}
+.cert-card p{font-size:.78rem;color:#8b949e;}
+.cert-card.active{border-color:#d29922;}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.contact-card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:24px;text-align:center;}
+.contact-card .icon{font-size:1.8rem;margin-bottom:8px;}
+.contact-card h3{font-size:.95rem;font-weight:600;margin-bottom:4px;}
+.contact-card p{font-size:.85rem;color:#8b949e;}
+
+/* FOOTER */
+footer{background:#161b22;border-top:1px solid #30363d;padding:24px 40px;text-align:center;color:#8b949e;font-size:.85rem;}
+
+@media(max-width:600px){
+.projects-grid,.about-grid,.certs-grid,.contact-grid{grid-template-columns:1fr;}
+.hero h1{font-size:2rem;}
+nav ul{gap:12px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">CB &mdash; Cyril Baaya</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#labs">Labs</a></li>
+    <li><a href="#certs">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="badge"><span class="status-dot"></span>Open to Internships &amp; Junior Roles &mdash; Nairobi, Kenya</div>
+  <h1>Cyril Baaya<br><span>Cybersecurity Analyst</span><br>in Training</h1>
+  <p>L5 Diploma in Computing with Cybersecurity (NCC Education). Hands-on labs in ethical hacking, network defence, and incident response. CompTIA Security+ SY0-701 candidate.</p>
+  <div class="btns">
+    <a class="btn btn-primary" href="https://github.com/cyr6x" target="_blank">View GitHub Profile</a>
+    <a class="btn btn-secondary" href="#projects">See Projects</a>
+  </div>
+</div>
+
+<div class="section" id="about">
+  <h2>About Me</h2>
+  <div class="about-grid">
+    <div class="about-card">
+      <h3>Who I Am</h3>
+      <p>I am a computing student specialising in cybersecurity, based in Nairobi, Kenya. I build real-world projects that bridge software development and information security &mdash; from full-stack inventory management systems to Kali Linux penetration testing labs.</p>
+    </div>
+    <div class="about-card">
+      <h3>Education</h3>
+      <ul>
+        <li>L5 Diploma in Computing with Cybersecurity &mdash; NCC Education (In Progress)</li>
+        <li>L4 Diploma in Computing &mdash; NCC Education (Completed)</li>
+        <li>Centre: Computer Pride, Nairobi</li>
+      </ul>
+    </div>
+    <div class="about-card">
+      <h3>Technical Skills</h3>
+      <div class="skills-grid">
+        <span class="skill-tag green">Nmap</span>
+        <span class="skill-tag green">Wireshark</span>
+        <span class="skill-tag green">Kali Linux</span>
+        <span class="skill-tag green">SNMP Enumeration</span>
+        <span class="skill-tag blue">React.js</span>
+        <span class="skill-tag blue">Node.js</span>
+        <span class="skill-tag blue">Supabase / PostgreSQL</span>
+        <span class="skill-tag blue">TypeScript</span>
+        <span class="skill-tag orange">Incident Response</span>
+        <span class="skill-tag orange">Vulnerability Analysis</span>
+        <span class="skill-tag orange">Network Defence</span>
+      </div>
+    </div>
+    <div class="about-card">
+      <h3>Focus Areas</h3>
+      <ul>
+        <li>Network Security &amp; Defence</li>
+        <li>Ethical Hacking &amp; Pen Testing</li>
+        <li>Malware Analysis &amp; Incident Response</li>
+        <li>SOC Analyst Skills (Log Analysis, SIEM)</li>
+        <li>Full-Stack Secure Web Development</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="projects">
+  <h2>Projects</h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="tag">Full-Stack Web App</div>
+      <h3>CTECH-IMS &mdash; Inventory Management System</h3>
+      <p>Production-ready Inventory Management System for C Tech Electronics. Role-based access control, real-time stock tracking, automated alerts, supplier management, and audit logging.</p>
+      <div class="tech"><span>React.js</span><span>Node.js</span><span>Supabase</span><span>PostgreSQL</span><span>TypeScript</span></div>
+      <div class="links">
+        <a href="https://github.com/cyr6x/CTECH-IMS" target="_blank">GitHub &rarr;</a>
+        <a href="https://ctech-ims.vercel.app" target="_blank">Live Demo &rarr;</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="tag">Security Tool</div>
+      <h3>MCQ-X-PBQ-SIM &mdash; Security+ Exam Simulator</h3>
+      <p>Custom CompTIA Security+ SY0-701 exam simulator with MCQs, select-two, and Performance-Based Questions (PBQs). Content sourced from Messer and Seidl reference materials.</p>
+      <div class="tech"><span>React.js</span><span>TypeScript</span><span>Lovable</span></div>
+      <div class="links">
+        <a href="https://github.com/cyr6x/MCQ-X-PBQ-SIM" target="_blank">GitHub &rarr;</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="tag">AI / Machine Learning</div>
+      <h3>DeepDrive AI System &mdash; Autonomous Truck</h3>
+      <p>AI system design for an autonomous truck prototype. Covers supervised vs reinforcement learning paradigms, neural network controller module, decision tree navigation, and expert system safety module.</p>
+      <div class="tech"><span>Python</span><span>Neural Networks</span><span>Reinforcement Learning</span><span>Expert Systems</span></div>
+      <div class="links">
+        <a href="https://github.com/cyr6x" target="_blank">GitHub &rarr;</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="tag">Network Security</div>
+      <h3>Network Security &amp; Defence</h3>
+      <p>Hybrid star topology LAN design with dual DMZ architecture, VLAN segmentation, IPSec VPN, WPA3-Enterprise wireless security, and IDS/IPS deployment. Full threat analysis and mitigation strategy.</p>
+      <div class="tech"><span>Cisco IOS</span><span>IPSec VPN</span><span>VLAN</span><span>WPA3</span><span>Firewall Rules</span></div>
+      <div class="links">
+        <a href="https://github.com/cyr6x/network-security-defence" target="_blank">GitHub &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section" id="labs">
+  <h2>Hands-On Labs</h2>
+  <div class="labs-list">
+
+    <div class="lab-item">
+      <div class="lab-info">
+        <h3>Nmap Network Reconnaissance Lab</h3>
+        <p>Progressive scanning: basic &rarr; service version (-sV) &rarr; OS detection (-O) &rarr; aggressive (-A) &rarr; gateway scan. Identified SMB (Port 445) as high-risk on QEMU host.</p>
+      </div>
+      <span class="lab-badge">Completed</span>
+    </div>
+
+    <div class="lab-item">
+      <div class="lab-info">
+        <h3>CVE-2019-20183 &mdash; Unrestricted File Upload Exploitation</h3>
+        <p>Analysed and documented exploitation of a client-side-only file validation vulnerability in Employee Records System 1.0, enabling arbitrary file upload and RCE.</p>
+      </div>
+      <span class="lab-badge">Completed</span>
+    </div>
+
+    <div class="lab-item">
+      <div class="lab-info">
+        <h3>SNMP Enumeration &amp; Countermeasures (Port 161)</h3>
+        <p>Used Nmap UDP scanning, onesixtyone brute-forcing, and snmpwalk MIB traversal. Documented SNMPv3 hardening, ACL controls, and community string rotation.</p>
+      </div>
+      <span class="lab-badge">Completed</span>
+    </div>
+
+    <div class="lab-item">
+      <div class="lab-info">
+        <h3>FTP Packet Sniffing &amp; OS Fingerprinting</h3>
+        <p>Captured FTP credentials in cleartext using Wireshark (tcpdump + FTP-DATA stream following). Documented FTPS/SFTP migration and network segmentation defence.</p>
+      </div>
+      <span class="lab-badge">Completed</span>
+    </div>
+
+    <div class="lab-item">
+      <div class="lab-info">
+        <h3>Unquoted Service Path Privilege Escalation (Windows)</h3>
+        <p>Enumerated unquoted service paths via WMIC, crafted msfvenom reverse shell payload, and achieved SYSTEM-level access on a vulnerable Windows test VM. Full remediation documented.</p>
+      </div>
+      <span class="lab-badge">Completed</span>
+    </div>
+
+    <div class="lab-item">
+      <div class="lab-info">
+        <h3>Rogue AP &amp; DNS Amplification DDoS Attack Analysis</h3>
+        <p>Analysed evil-twin rogue access point attack methodology and DNS amplification DDoS (UDP reflection). Full mitigation strategy including WIDS, 802.11w PMF, and RRL implementation.</p>
+      </div>
+      <span class="lab-badge">Completed</span>
+    </div>
+
+    <div class="lab-item">
+      <div class="lab-info">
+        <h3>Malware Static &amp; Dynamic Analysis</h3>
+        <p>Performed offline malware analysis using PEiD, CFF Explorer, IDA Pro, Cuckoo Sandbox, and Volatility Framework. Identified C2 beaconing, persistence mechanisms, and double-extension phishing payload.</p>
+      </div>
+      <span class="lab-badge">Completed</span>
+    </div>
+
+  </div>
+</div>
+
+<div class="section" id="certs">
+  <h2>Certifications</h2>
+  <div class="certs-grid">
+    <div class="cert-card active">
+      <div class="icon">&#128737;</div>
+      <h3>CompTIA Security+</h3>
+      <p>SY0-701 &mdash; In Progress</p>
+    </div>
+    <div class="cert-card">
+      <div class="icon">&#127891;</div>
+      <h3>L5 Diploma &mdash; Computing &amp; Cybersecurity</h3>
+      <p>NCC Education &mdash; In Progress</p>
+    </div>
+    <div class="cert-card">
+      <div class="icon">&#9989;</div>
+      <h3>L4 Diploma &mdash; Computing</h3>
+      <p>NCC Education &mdash; Completed</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="contact">
+  <h2>Get In Touch</h2>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="icon">&#128187;</div>
+      <h3>GitHub</h3>
+      <p><a href="https://github.com/cyr6x" target="_blank">github.com/cyr6x</a></p>
+    </div>
+    <div class="contact-card">
+      <div class="icon">&#128205;</div>
+      <h3>Location</h3>
+      <p>Nairobi, Kenya</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Built by Cyril Baaya &mdash; Cybersecurity &amp; Computing Student &mdash; Nairobi, Kenya &mdash; 2026</p>
+</footer>
+
+</body>
+</html>
