@@ -1,13 +1,23 @@
 # cyr6x.github.io
 
-Personal cybersecurity portfolio — BSc Cybersecurity & Networking, ethical hacking labs, and full-stack projects
+Recruiter-focused cybersecurity portfolio for Cyril Baaya.
 
-## Badges & Certifications
+## Design direction
 
-[![Linux Command Line](https://img.shields.io/badge/Immersive%20Labs-Linux%20Command%20Line-0057FF?style=for-the-badge&logo=linux&logoColor=white)](https://cybermillion.immersivelabs.online/progress/achievements)
+- Matte-black and silver foundation with a restrained Ferrari-red accent
+- Editorial typography and modular pacing inspired by modern performance brands
+- Lightweight animated security mesh with reduced-motion support
+- Project case studies structured as Challenge → Architecture/Solution → Proof
+- Dark mode by default, optional light theme, responsive navigation and accessible focus states
 
-> **Linux Command Line** — Immersive Labs Cyber Fundamentals Collection · Earned 02 Jul 2026
+## Stack
 
-## Portfolio
+Pure HTML5, CSS and minimal vanilla JavaScript. No build step or framework is required.
 
-Visit the full portfolio: [cyr6x.github.io](https://cyr6x.github.io)
+## Deploy
+
+GitHub Pages serves `index.html` directly from the repository root.
+
+## Content integrity
+
+Project, lab, education and certification claims link to existing GitHub evidence. The site does not claim a completed Security+ certification, security clearance or unverified employment history.
