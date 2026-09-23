@@ -7,13 +7,13 @@ const header=$('#header');
 const progress=$('#progress');
 const portrait=$('#portrait-stage');
 const identity=$('#identity');
-const root=$('#root');
-const rootGlobe=$('#root-globe');
 const work=$('#work');
 const workTrack=$('#work-track');
 const cards=$$('.case-card');
 const workCurrent=$('#work-current');
 const skillDeck=$('#skill-deck');
+const positionIndex=$('#position-index');
+const positionLabel=$('#position-label');
 
 $('#year').textContent=new Date().getFullYear();
 const menu=$('#menu');
@@ -51,7 +51,6 @@ $$('[data-case] .case-open,.lab-row[data-case]').forEach(element=>element.addEve
 $('.dialog-close').addEventListener('click',()=>dialog.close());
 dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close()});
 
-const brainNodes=$$('.brain-node');
 portrait.addEventListener('pointermove',event=>{
   if(reduced)return;
   const rect=portrait.getBoundingClientRect();
@@ -61,23 +60,12 @@ portrait.addEventListener('pointermove',event=>{
   portrait.style.setProperty('--tilt-y',`${(.5-y)*4}deg`);
   portrait.style.setProperty('--px',`${x*100}%`);
   portrait.style.setProperty('--py',`${y*100}%`);
-  let nearest=null;
-  let distance=Infinity;
-  brainNodes.forEach(node=>{
-    const box=node.getBoundingClientRect();
-    const current=Math.hypot(event.clientX-(box.left+box.width/2),event.clientY-(box.top+box.height/2));
-    if(current<distance){distance=current;nearest=node}
-  });
-  brainNodes.forEach(node=>node.classList.toggle('active',node===nearest&&distance<150));
 });
 portrait.addEventListener('pointerleave',()=>{
   portrait.style.setProperty('--tilt-x','0deg');
   portrait.style.setProperty('--tilt-y','0deg');
-  brainNodes.forEach(node=>node.classList.remove('active'));
 });
 
-const terminalSpans=$$('#terminal-lines span');
-const servers=$$('.server[data-server]');
 const sections=$$('section[id]');
 let pageRaf=0;
 function updatePage(){
@@ -87,42 +75,44 @@ function updatePage(){
   progress.style.transform=`scaleX(${total})`;
   header.classList.toggle('scrolled',scrollY>25);
   document.documentElement.style.setProperty('--brand',`hsl(${clamp(total)*230+5} 82% ${total>.7?68:88}%)`);
-  if(!reduced&&innerWidth>820){
+  if(!reduced){
     const identityRect=identity.getBoundingClientRect();
     const identityProgress=clamp(-identityRect.top/(identity.offsetHeight-innerHeight));
-    portrait.style.setProperty('--face-scale',String(1+identityProgress*1.15));
-    portrait.style.setProperty('--face-x',`${-identityProgress*20}vw`);
-    portrait.style.setProperty('--face-y',`${identityProgress*8}vh`);
-    $('.identity-copy').style.opacity=String(clamp(1-identityProgress*1.65));
-    $('.identity-copy').style.transform=`translateY(calc(-48% - ${identityProgress*80}px))`;
+    const galaxyProgress=clamp((identityProgress-.15)/.67);
+    const accessProgress=clamp((identityProgress-.7)/.2);
+    portrait.style.setProperty('--face-scale',String(1+identityProgress*.34));
+    portrait.style.setProperty('--face-x','0px');
+    portrait.style.setProperty('--face-y',`${identityProgress*-2.5}vh`);
+    portrait.style.setProperty('--portrait-opacity',String(1-galaxyProgress*.74));
+    portrait.style.setProperty('--galaxy-opacity',String(galaxyProgress));
+    portrait.style.setProperty('--planet-opacity',String(clamp((identityProgress-.38)/.3)));
+    portrait.classList.toggle('galaxy-mode',identityProgress>.38);
+    $('.hero-intro').style.setProperty('--intro-opacity',String(clamp(1-identityProgress*2.2)));
+    $('.identity-scroll').style.setProperty('--intro-opacity',String(clamp(1-identityProgress*2.5)));
+    $('#access-terminal').style.setProperty('--access-opacity',String(accessProgress));
+    $('#access-terminal').style.translate=`-50% ${20-accessProgress*20}px`;
 
-    const rootRect=root.getBoundingClientRect();
-    const rootProgress=clamp(-rootRect.top/(root.offsetHeight-innerHeight));
-    rootGlobe.style.setProperty('--root-scale',String(.5+rootProgress*1.7));
-    rootGlobe.style.opacity=String(.28+rootProgress*.65);
-    $('.root-terminal').style.setProperty('--terminal-opacity',String(clamp((rootProgress-.1)*2.2)));
-    $('.root-terminal').style.setProperty('--terminal-y',`${(1-clamp((rootProgress-.1)*2))*45}px`);
-    terminalSpans.forEach((span,index)=>span.classList.toggle('visible',rootProgress>(.13+index*.13)));
-
-    const workRect=work.getBoundingClientRect();
-    const workProgress=clamp(-workRect.top/(work.offsetHeight-innerHeight));
-    const entrance=clamp(workProgress/.13);
-    const travel=clamp((workProgress-.13)/.87);
-    const maxShift=Math.max(0,workTrack.scrollWidth-innerWidth+innerWidth*.08);
-    workTrack.style.setProperty('--work-x',`${(1-entrance)*30-travel*maxShift/innerWidth*100}vw`);
-    workTrack.style.setProperty('--work-y',`${(1-entrance)*25}vh`);
-    workTrack.style.setProperty('--work-r',`${(1-entrance)*4}deg`);
-    const center=innerWidth/2;
-    let nearest=0;
-    let minimum=Infinity;
-    cards.forEach((card,index)=>{
-      const rect=card.getBoundingClientRect();
-      const distance=Math.min(1,Math.abs(rect.left+rect.width/2-center)/innerWidth);
-      card.style.setProperty('--case-opacity',String(1-distance*.55));
-      card.style.setProperty('--case-turn',`${(rect.left+rect.width/2-center)/innerWidth*-5}deg`);
-      if(distance<minimum){minimum=distance;nearest=index}
-    });
-    workCurrent.textContent=String(nearest+1).padStart(2,'0');
+    if(innerWidth>820){
+      const workRect=work.getBoundingClientRect();
+      const workProgress=clamp(-workRect.top/(work.offsetHeight-innerHeight));
+      const entrance=clamp(workProgress/.13);
+      const travel=clamp((workProgress-.13)/.87);
+      const maxShift=Math.max(0,workTrack.scrollWidth-innerWidth+innerWidth*.08);
+      workTrack.style.setProperty('--work-x',`${(1-entrance)*30-travel*maxShift/innerWidth*100}vw`);
+      workTrack.style.setProperty('--work-y',`${(1-entrance)*25}vh`);
+      workTrack.style.setProperty('--work-r',`${(1-entrance)*4}deg`);
+      const center=innerWidth/2;
+      let nearest=0;
+      let minimum=Infinity;
+      cards.forEach((card,index)=>{
+        const rect=card.getBoundingClientRect();
+        const distance=Math.min(1,Math.abs(rect.left+rect.width/2-center)/innerWidth);
+        card.style.setProperty('--case-opacity',String(1-distance*.55));
+        card.style.setProperty('--case-turn',`${(rect.left+rect.width/2-center)/innerWidth*-5}deg`);
+        if(distance<minimum){minimum=distance;nearest=index}
+      });
+      workCurrent.textContent=String(nearest+1).padStart(2,'0');
+    }
   }
   let active='identity';
   let closest=Infinity;
@@ -130,12 +120,11 @@ function updatePage(){
     const distance=Math.abs(section.getBoundingClientRect().top-innerHeight*.42);
     if(distance<closest){closest=distance;active=section.id}
   });
-  servers.forEach(server=>{
-    const current=server.dataset.server===active;
-    server.classList.toggle('current',current);
-    if(!current)server.classList.add('online');
-  });
   $$('#nav-links a').forEach(link=>link.classList.toggle('active',link.dataset.section===active));
+  const visibleSections=['identity','work','archive','arsenal','roadmap','contact'];
+  const sectionPosition=Math.max(0,visibleSections.indexOf(active));
+  positionIndex.textContent=String(sectionPosition+1).padStart(2,'0');
+  positionLabel.textContent=(sections.find(section=>section.id===active)?.dataset.label||'About').toUpperCase();
 }
 addEventListener('scroll',()=>{if(!pageRaf)pageRaf=requestAnimationFrame(updatePage)},{passive:true});
 addEventListener('resize',()=>{if(!pageRaf)pageRaf=requestAnimationFrame(updatePage)},{passive:true});
@@ -147,14 +136,6 @@ const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
 $$('.reveal').forEach(element=>revealObserver.observe(element));
 const deckObserver=new IntersectionObserver(([entry])=>{if(entry.isIntersecting)skillDeck.classList.add('spread')},{threshold:.28});
 deckObserver.observe(skillDeck);
-
-const decoy=$('#decoy-server');
-const health=$('#health-foot');
-if(!reduced)setInterval(()=>{
-  const state=decoy.classList.contains('offline')?'online':decoy.classList.contains('unstable')?'offline':'unstable';
-  decoy.className=`server ${state}`;
-  health.textContent=state==='offline'?'01 node isolated':'06 online';
-},3300);
 
 const mesh=$('#mesh');
 const meshContext=mesh.getContext('2d');
@@ -199,30 +180,25 @@ addEventListener('resize',()=>{cancelAnimationFrame(meshFrame);sizeMesh();drawMe
 addEventListener('pointermove',event=>{pointer={x:event.clientX,y:event.clientY,on:true}},{passive:true});
 document.documentElement.addEventListener('pointerleave',()=>pointer.on=false);
 
-const globeContext=rootGlobe.getContext('2d');
-let globeFrame;
-const globeStart=performance.now();
-function sizeGlobe(){
-  const globeRatio=Math.min(devicePixelRatio||1,2);
-  const size=Math.min(innerWidth*.74,780);
-  rootGlobe.width=size*globeRatio;rootGlobe.height=size*globeRatio;
-  rootGlobe.style.width=`${size}px`;rootGlobe.style.height=`${size}px`;
-  globeContext.setTransform(globeRatio,0,0,globeRatio,0,0);
+const brainGalaxy=$('#brain-galaxy');
+const galaxyContext=brainGalaxy.getContext('2d');
+let galaxyFrame,galaxyPoints=[],galaxyRatio=1;
+function sizeBrainGalaxy(){
+  const box=brainGalaxy.getBoundingClientRect();
+  galaxyRatio=Math.min(devicePixelRatio||1,2);
+  brainGalaxy.width=Math.max(1,box.width*galaxyRatio);brainGalaxy.height=Math.max(1,box.height*galaxyRatio);
+  galaxyContext.setTransform(galaxyRatio,0,0,galaxyRatio,0,0);
+  galaxyPoints=Array.from({length:120},(_,index)=>({x:Math.random()*box.width,y:Math.random()*box.height,r:index%19===0?1.8:Math.random()*.8+.3,hot:index%17===0,phase:Math.random()*6.28}));
 }
-function drawGlobe(now){
-  const size=rootGlobe.clientWidth,center=size/2,radius=size*.31,time=(now-globeStart)*.00032;
-  globeContext.clearRect(0,0,size,size);
-  const points=[];
-  for(let index=0;index<360;index++){
-    const y=1-index/359*2,radial=Math.sqrt(1-y*y),theta=2.399963*index+time,x=Math.cos(theta)*radial,z=Math.sin(theta)*radial,depth=(z+1)/2;
-    points.push({x:center+x*radius,y:center+y*radius,z,depth});
-  }
-  points.sort((a,b)=>a.z-b.z).forEach((point,index)=>{
-    globeContext.beginPath();globeContext.arc(point.x,point.y,.4+point.depth*1.25,0,Math.PI*2);
-    globeContext.fillStyle=index%29===0?`rgba(255,48,56,${.2+point.depth*.75})`:`rgba(190,200,214,${.06+point.depth*.42})`;globeContext.fill();
-  });
-  globeContext.beginPath();globeContext.arc(center,center,radius*1.03,0,Math.PI*2);globeContext.strokeStyle='rgba(255,48,56,.16)';globeContext.stroke();
-  if(!reduced)globeFrame=requestAnimationFrame(drawGlobe);
+function drawBrainGalaxy(time=0){
+  const box=brainGalaxy.getBoundingClientRect();
+  galaxyContext.clearRect(0,0,box.width,box.height);
+  const centerX=box.width*.5,centerY=box.height*.31;
+  galaxyContext.save();galaxyContext.translate(centerX,centerY);galaxyContext.rotate(time*.000035);galaxyContext.scale(1,.46);
+  for(let ring=0;ring<4;ring++){galaxyContext.beginPath();galaxyContext.ellipse(0,0,box.width*(.16+ring*.09),box.width*(.16+ring*.09),0,0,Math.PI*2);galaxyContext.strokeStyle=`rgba(190,201,216,${.13-ring*.018})`;galaxyContext.setLineDash(ring%2?[5,9]:[]);galaxyContext.stroke()}
+  galaxyContext.restore();galaxyContext.setLineDash([]);
+  galaxyPoints.forEach((point,index)=>{const breathe=Math.sin(time*.001+point.phase)*3;galaxyContext.beginPath();galaxyContext.arc(point.x+breathe,point.y+breathe*.4,point.r,0,Math.PI*2);galaxyContext.fillStyle=point.hot?'rgba(255,48,56,.85)':'rgba(210,220,232,.42)';galaxyContext.fill();if(index%23===0){const next=galaxyPoints[(index+7)%galaxyPoints.length];galaxyContext.beginPath();galaxyContext.moveTo(point.x,point.y);galaxyContext.lineTo(next.x,next.y);galaxyContext.strokeStyle='rgba(190,201,216,.08)';galaxyContext.stroke()}});
+  if(!reduced)galaxyFrame=requestAnimationFrame(drawBrainGalaxy);
 }
-sizeGlobe();drawGlobe(performance.now());
-addEventListener('resize',()=>{cancelAnimationFrame(globeFrame);sizeGlobe();drawGlobe(performance.now())},{passive:true});
+sizeBrainGalaxy();drawBrainGalaxy();
+addEventListener('resize',()=>{cancelAnimationFrame(galaxyFrame);sizeBrainGalaxy();drawBrainGalaxy()},{passive:true});
