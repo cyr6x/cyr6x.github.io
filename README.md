@@ -11,6 +11,7 @@ Recruiter-focused cybersecurity portfolio for Cyril Baaya.
 - Planet-style project navigation that stays faint until hover, then resolves as the portrait transitions into the roadmap
 - Readable floating section navigation with percentage and progress meter
 - Concise project tiles with full case documentation opened on demand
+- Evidence separated into software builds, security investigations, and controlled labs or coursework reports
 - Telemetry-style project visuals, card-deck competencies and scroll-driven horizontal evidence traversal
 - Dark interface, responsive navigation and accessible motion fallbacks
 - Full SSH-style terminal over the animated galaxy, followed by a functional Security navigation hub
