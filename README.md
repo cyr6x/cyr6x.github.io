@@ -7,11 +7,13 @@ Recruiter-focused cybersecurity portfolio for Cyril Baaya.
 - Matte-black and silver foundation with a restrained Ferrari-red accent
 - Editorial typography and modular pacing inspired by modern performance brands
 - Persistent breathing neural mesh with live signal pulses, pointer response and reduced-motion support
-- Telemetry-style project visuals, scroll progress and section-aware signal rail
-- Project case studies structured as Challenge → Architecture/Solution → Proof
-- Dark mode by default, optional light theme, responsive navigation and accessible focus states
-- SSH-style session entry and a native Canvas network-globe transition
-- Evidence-led BSc roadmap with diploma work consolidated as foundations
+- Interactive portrait with scan layers, cognitive navigation nodes and a scroll-driven `.root` transition
+- Server-health site map showing current position and controlled node isolation/recovery
+- Concise project tiles with full case documentation opened on demand
+- Telemetry-style project visuals, card-deck competencies and scroll-driven horizontal evidence traversal
+- Dark interface, responsive navigation and accessible motion fallbacks
+- SSH-style access sequence and a native Canvas network-globe transition
+- Evidence-led BSc roadmap with earlier academic work consolidated as degree evidence
 
 ## Stack
 
