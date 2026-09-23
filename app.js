@@ -78,19 +78,24 @@ function updatePage(){
   if(!reduced){
     const identityRect=identity.getBoundingClientRect();
     const identityProgress=clamp(-identityRect.top/(identity.offsetHeight-innerHeight));
-    const galaxyProgress=clamp((identityProgress-.15)/.67);
-    const accessProgress=clamp((identityProgress-.7)/.2);
-    portrait.style.setProperty('--face-scale',String(1+identityProgress*.34));
+    const galaxyProgress=clamp((identityProgress-.18)/.36);
+    const accessProgress=clamp((identityProgress-.36)/.12)*(1-clamp((identityProgress-.65)/.12));
+    portrait.style.setProperty('--face-scale',String(1-identityProgress*.18));
     portrait.style.setProperty('--face-x','0px');
     portrait.style.setProperty('--face-y',`${identityProgress*-2.5}vh`);
-    portrait.style.setProperty('--portrait-opacity',String(1-galaxyProgress*.74));
+    portrait.style.setProperty('--portrait-opacity',String(1-galaxyProgress));
     portrait.style.setProperty('--galaxy-opacity',String(galaxyProgress));
-    portrait.style.setProperty('--planet-opacity',String(clamp((identityProgress-.38)/.3)));
-    portrait.classList.toggle('galaxy-mode',identityProgress>.38);
+    portrait.style.setProperty('--planet-opacity',String(clamp((identityProgress-.72)/.15)));
+    portrait.classList.toggle('galaxy-mode',identityProgress>.72);
+    portrait.classList.toggle('portrait-mode',identityProgress<.35);
+    $$('.ssh-line').forEach((line,index)=>line.style.opacity=String(clamp((identityProgress-.4-index*.035)/.05)));
     $('.hero-intro').style.setProperty('--intro-opacity',String(clamp(1-identityProgress*2.2)));
     $('.identity-scroll').style.setProperty('--intro-opacity',String(clamp(1-identityProgress*2.5)));
     $('#access-terminal').style.setProperty('--access-opacity',String(accessProgress));
-    $('#access-terminal').style.translate=`-50% ${20-accessProgress*20}px`;
+    $('#access-terminal').style.translate=`-50% calc(-50% + ${20-accessProgress*20}px)`;
+    const deckRect=skillDeck.getBoundingClientRect();
+    const deckProgress=clamp((innerHeight-deckRect.top)/(innerHeight*.55));
+    skillDeck.style.setProperty('--deck-open',String(deckProgress));
 
     if(innerWidth>820){
       const workRect=work.getBoundingClientRect();
@@ -115,16 +120,17 @@ function updatePage(){
     }
   }
   let active='identity';
-  let closest=Infinity;
   sections.forEach(section=>{
-    const distance=Math.abs(section.getBoundingClientRect().top-innerHeight*.42);
-    if(distance<closest){closest=distance;active=section.id}
+    if(section.getBoundingClientRect().top<=innerHeight*.42)active=section.id;
   });
   $$('#nav-links a').forEach(link=>link.classList.toggle('active',link.dataset.section===active));
   const visibleSections=['identity','work','archive','arsenal','roadmap','contact'];
   const sectionPosition=Math.max(0,visibleSections.indexOf(active));
   positionIndex.textContent=String(sectionPosition+1).padStart(2,'0');
   positionLabel.textContent=(sections.find(section=>section.id===active)?.dataset.label||'About').toUpperCase();
+  $('#journey-percent').textContent=`${Math.round(total*100)}%`;
+  $('#journey-fill').style.transform=`scaleX(${total})`;
+  $$('.journey-links a').forEach(link=>{if(link.hash===`#${active}`)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current')});
 }
 addEventListener('scroll',()=>{if(!pageRaf)pageRaf=requestAnimationFrame(updatePage)},{passive:true});
 addEventListener('resize',()=>{if(!pageRaf)pageRaf=requestAnimationFrame(updatePage)},{passive:true});
@@ -134,8 +140,7 @@ const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
   if(entry.isIntersecting){entry.target.classList.add('in');revealObserver.unobserve(entry.target)}
 }),{threshold:.13});
 $$('.reveal').forEach(element=>revealObserver.observe(element));
-const deckObserver=new IntersectionObserver(([entry])=>{if(entry.isIntersecting)skillDeck.classList.add('spread')},{threshold:.28});
-deckObserver.observe(skillDeck);
+$$('[data-open-case]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();openCase(link.dataset.openCase)}));
 
 const mesh=$('#mesh');
 const meshContext=mesh.getContext('2d');
@@ -184,14 +189,14 @@ const brainGalaxy=$('#brain-galaxy');
 const galaxyContext=brainGalaxy.getContext('2d');
 let galaxyFrame,galaxyPoints=[],galaxyRatio=1;
 function sizeBrainGalaxy(){
-  const box=brainGalaxy.getBoundingClientRect();
+  const box={width:brainGalaxy.clientWidth,height:brainGalaxy.clientHeight};
   galaxyRatio=Math.min(devicePixelRatio||1,2);
   brainGalaxy.width=Math.max(1,box.width*galaxyRatio);brainGalaxy.height=Math.max(1,box.height*galaxyRatio);
   galaxyContext.setTransform(galaxyRatio,0,0,galaxyRatio,0,0);
   galaxyPoints=Array.from({length:120},(_,index)=>({x:Math.random()*box.width,y:Math.random()*box.height,r:index%19===0?1.8:Math.random()*.8+.3,hot:index%17===0,phase:Math.random()*6.28}));
 }
 function drawBrainGalaxy(time=0){
-  const box=brainGalaxy.getBoundingClientRect();
+  const box={width:brainGalaxy.clientWidth,height:brainGalaxy.clientHeight};
   galaxyContext.clearRect(0,0,box.width,box.height);
   const centerX=box.width*.5,centerY=box.height*.31;
   galaxyContext.save();galaxyContext.translate(centerX,centerY);galaxyContext.rotate(time*.000035);galaxyContext.scale(1,.46);
