@@ -37,6 +37,9 @@ const caseFiles={
   ethical:{title:'Ethical Hacking Reports',lede:'Controlled security assessments documented as findings, evidence, impact and remediation.',role:'Performed the lab work and wrote the assessment evidence.',method:'Examined web upload paths, SNMP, FTP artifacts, privilege escalation and OSINT in isolated environments.',evidence:['Five assessment reports','Reproduction evidence and screenshots','Impact explanations','Practical remediation'],learning:'The quality of a finding depends on restraint, reproducibility and a fix the reader can act on.',next:'Reframe future assessments around attack paths and validation of defensive coverage.',repo:'https://github.com/cyr6x/ethical-hacking-lab-reports'},
   nmap:{title:'Nmap Network Scan',lede:'A staged network-enumeration exercise moving from discovery to services and operating-system hypotheses.',role:'Executed and documented the scan against controlled targets.',method:'Used progressive scans to reduce noise, identify exposed services and correlate fingerprints.',evidence:['Host discovery sequence','Service and version enumeration','OS fingerprinting evidence','Commands, screenshots and interpretation'],learning:'Enumeration is a decision process: each scan should answer a question and shape the next one.',next:'Add detection-side telemetry to show how each scan appears to defenders.',repo:'https://github.com/cyr6x/nmap-network-scan'},
   burp:{title:'Burp Suite Web Testing',lede:'A controlled web-security lab examining SQL injection and reflected cross-site scripting in DVWA.',role:'Performed the tests, captured evidence and documented defensive fixes.',method:'Intercepted and modified requests, validated application behaviour and connected each result to its underlying weakness.',evidence:['Request and response evidence','SQL injection and XSS reproduction','Root-cause explanation','Defensive remediation guidance'],learning:'A useful security report connects payload, application behaviour, business impact and a verifiable fix.',next:'Expand into authenticated testing and retesting after remediation.',repo:'https://github.com/cyr6x/burpsuite-web-testing-lab'}
+  ,metasploit:{title:'Metasploit Exploitation Lab',lede:'A controlled exploitation exercise kept as practical evidence, with an emphasis on impact, safe handling and remediation.',role:'Completed the lab work and retained the supporting documentation.',method:'Worked through the exploitation workflow in an isolated environment, then documented the exposure and the defensive control it calls for.',evidence:['Controlled-lab documentation','Exploit workflow notes','Observed impact','Remediation perspective'],learning:'Technical validation matters most when it leads to a practical defensive response.',next:'Continue mapping offensive validation to detection and hardening evidence.',repo:'https://github.com/cyr6x/metasploit-exploitation-lab'}
+  ,password:{title:'Password Auditing Lab',lede:'A controlled password-security exercise focused on credential risk, password strength and remediation.',role:'Completed and documented the lab work in an authorised environment.',method:'Examined credential-risk concepts and recorded the security measures that reduce exposure.',evidence:['Lab documentation','Password-security concepts','Risk and control notes','Repository evidence'],learning:'Credential security is a human and technical control problem, not only a policy requirement.',next:'Connect future identity work to monitoring and access-control design.',repo:'https://github.com/cyr6x/password-cracking-lab'}
+  ,recon:{title:'Passive Reconnaissance Labs',lede:'A research-led lab series covering passive discovery, asset context and careful evidence handling.',role:'Completed the coursework exercises and recorded the process.',method:'Used passive research methods to build an evidence trail before making any active assumptions.',evidence:['Research workflow','Asset-context notes','Evidence handling','Repository documentation'],learning:'A useful investigation begins with sound context and disciplined documentation.',next:'Extend reconnaissance work into defensive exposure-management exercises.',repo:'https://github.com/cyr6x/passive-recon-labs'}
 };
 
 const dialog=$('#case-dialog');
@@ -64,6 +67,17 @@ portrait.addEventListener('pointermove',event=>{
 portrait.addEventListener('pointerleave',()=>{
   portrait.style.setProperty('--tilt-x','0deg');
   portrait.style.setProperty('--tilt-y','0deg');
+});
+portrait.addEventListener('pointermove',event=>{
+  if(!portrait.classList.contains('galaxy-mode')||reduced)return;
+  const rect=portrait.getBoundingClientRect();
+  const x=(event.clientX-rect.left)/rect.width-.5;
+  const y=(event.clientY-rect.top)/rect.height-.5;
+  $$('.planet').forEach((planet,index)=>{
+    const strength=12-index*1.5;
+    planet.style.setProperty('--pull-x',`${-x*strength}px`);
+    planet.style.setProperty('--pull-y',`${-y*strength}px`);
+  });
 });
 
 const sections=$$('section[id]');
@@ -124,7 +138,7 @@ function updatePage(){
     if(section.getBoundingClientRect().top<=innerHeight*.42)active=section.id;
   });
   $$('#nav-links a').forEach(link=>link.classList.toggle('active',link.dataset.section===active));
-  const visibleSections=['identity','work','archive','arsenal','roadmap','contact'];
+  const visibleSections=['identity','work','investigations','archive','arsenal','roadmap','contact'];
   const sectionPosition=Math.max(0,visibleSections.indexOf(active));
   positionIndex.textContent=String(sectionPosition+1).padStart(2,'0');
   positionLabel.textContent=(sections.find(section=>section.id===active)?.dataset.label||'About').toUpperCase();
