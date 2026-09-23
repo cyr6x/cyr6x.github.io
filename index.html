@@ -3,85 +3,193 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Cyril Baaya — defensive security, SOC operations, network analysis and security engineering. A living record of systems, investigations and growth.">
+  <meta name="description" content="Cyril Baaya — cybersecurity analyst and networking portfolio. Security operations, detection engineering, network analysis, labs, coursework and capstone evidence.">
   <meta name="theme-color" content="#050608">
-  <meta name="referrer" content="no-referrer">
   <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; form-action 'none'; upgrade-insecure-requests">
-  <meta property="og:title" content="Cyril Baaya | Defensive Security">
-  <meta property="og:description" content="Security projects, investigations, labs and a clear professional roadmap.">
+  <meta property="og:title" content="Cyril Baaya | Cybersecurity Analyst & Networking">
+  <meta property="og:description" content="Security-first portfolio: SOC investigations, network analysis, labs, coursework and final-year capstone evidence.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cyr6x.github.io/">
   <link rel="canonical" href="https://cyr6x.github.io/">
-  <title>Cyril Baaya | Defensive Security</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23050608'/%3E%3Ccircle cx='32' cy='32' r='20' fill='none' stroke='%23ff3038' stroke-width='3'/%3E%3Cpath d='M16 36c8-13 24-17 35-7' fill='none' stroke='%23d8dce3' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='18' cy='36' r='4' fill='%23ff3038'/%3E%3C/svg%3E">
+  <title>Cyril Baaya | Cybersecurity Analyst & Networking</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23050608'/%3E%3Ccircle cx='32' cy='32' r='20' fill='none' stroke='%23ff3b43' stroke-width='3'/%3E%3Cpath d='M15 39c9-15 28-18 38-6' fill='none' stroke='%23d8dce3' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <canvas id="mesh" aria-hidden="true"></canvas>
+  <canvas id="space" aria-hidden="true"></canvas>
   <div class="grain" aria-hidden="true"></div>
-  <div class="scroll-progress" id="progress"></div>
 
   <header class="site-header" id="header">
-    <div class="shell nav">
-      <a class="brand" href="#identity"><span class="brand-mark">CB</span><span>CYRIL BAAYA<small>defensive security</small></span></a>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#identity" data-section="identity">About</a></li>
-        <li><a href="#work" data-section="work">Builds</a></li>
-        <li><a href="#investigations" data-section="investigations">Investigations</a></li>
-        <li><a href="#archive" data-section="archive">Labs &amp; reports</a></li>
-        <li><a href="#arsenal" data-section="arsenal">Skills</a></li>
-        <li><a href="#roadmap" data-section="roadmap">Roadmap</a></li>
-      </ul>
-      <div class="nav-actions"><a class="pill" href="https://www.linkedin.com/in/cyril-b-0b35bb23a" target="_blank" rel="noreferrer">LinkedIn ↗</a><button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation">☰</button></div>
-    </div>
+    <a class="brand" href="#top" aria-label="Back to top">
+      <span class="brand-mark">CB</span>
+      <span class="brand-copy">Cybersecurity Analyst <small>Security · Networking</small></span>
+    </a>
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <a href="#projects">Projects</a>
+      <a href="#profile">Technical profile</a>
+      <a href="#path">Path</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation">Menu</button>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <a href="#projects">Projects</a><a href="#profile">Technical profile</a><a href="#path">Path</a><a href="#contact">Contact</a>
+    </nav>
   </header>
 
-  <nav class="journey-nav" aria-label="Page progress"><div class="journey-status"><span id="position-index">01</span><span id="position-label">ABOUT</span><span id="journey-percent">0%</span></div><div class="journey-meter"><i id="journey-fill"></i></div><div class="journey-links"><a href="#identity">About</a><a href="#work">Builds</a><a href="#investigations">Cases</a><a href="#archive">Evidence</a><a href="#roadmap">Roadmap</a></div></nav>
-
   <main id="main">
-    <section class="identity-sequence" id="identity" data-label="About">
-      <div class="identity-sticky">
-        <div class="hero-wordmark" aria-hidden="true"><span>CYRIL</span><span>BAAYA</span></div>
-        <div class="portrait-stage" id="portrait-stage" aria-label="Interactive portrait navigation">
-          <div class="portrait-shell"><canvas id="brain-galaxy" aria-hidden="true"></canvas><div class="portrait"><img src="assets/cyril-root.webp" alt="Portrait of Cyril Baaya" width="1254" height="1254"></div><div class="face-schematic" aria-hidden="true"></div><div class="face-slice slice-a" aria-hidden="true"></div><div class="face-slice slice-b" aria-hidden="true"></div><div class="face-slice slice-c" aria-hidden="true"></div><div class="scan-swoop" aria-hidden="true"></div></div>
-          <a class="security-core" href="#work" aria-label="Explore security evidence"><strong>SECURITY</strong><span>evidence system</span></a><div class="orbit-path orbit-one" aria-hidden="true"></div><div class="orbit-path orbit-two" aria-hidden="true"></div>
-          <nav class="planet-system" aria-label="Security evidence navigation"><a class="planet planet-one" href="#work"><b>01</b><span>BUILDS<small>SIRTS · C TECH · SIMULATOR</small></span></a><a class="planet planet-two" href="#investigations"><b>02</b><span>CASES<small>SENTINEL · PCAP ANALYSIS</small></span></a><a class="planet planet-three" href="#archive"><b>03</b><span>LABS<small>CONTROLLED SECURITY PRACTICE</small></span></a><a class="planet planet-four" href="#archive"><b>04</b><span>REPORTS<small>COURSEWORK &amp; TECHNICAL EVIDENCE</small></span></a></nav>
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">SECURITY OPERATIONS · NETWORK ANALYSIS · DETECTION</p>
+        <h1 id="hero-title"><span>Cyril Baaya</span>Cybersecurity analyst<br>with a networking core.</h1>
+        <p class="hero-summary">I investigate telemetry, analyse network behaviour, validate controls and document the evidence. This portfolio is the working record: capstone, labs, coursework and security projects in one place.</p>
+        <div class="hero-actions">
+          <a class="action primary" href="#projects">Explore evidence</a>
+          <a class="action" href="https://github.com/cyr6x" target="_blank" rel="noreferrer">GitHub ↗</a>
         </div>
-        <div class="hero-intro"><strong>CYRIL BAAYA</strong><span>Cybersecurity &amp; Networking</span><p>SOC → Security Engineering → Cloud Security</p></div>
-        <div class="access-terminal" id="access-terminal" aria-label="Simulated portfolio connection"><div class="terminal-heading"><span>● ● ●</span><span>REMOTE SESSION / CYRIL.ROOT</span></div><div class="ssh-line">$ ssh visitor@cyril.root</div><div class="ssh-line">[identity] Cyril Baaya</div><div class="ssh-line">[scope] projects, labs &amp; learning</div><div class="ssh-line">[connection] established</div><b class="ssh-line">USER CONNECTED</b></div>
-        <div class="identity-scroll">Scroll to enter</div>
+      </div>
+
+      <div class="portrait-zone" id="portrait-zone" aria-label="Interactive portrait of Cyril Baaya">
+        <div class="portrait-orbit orbit-a" aria-hidden="true"></div>
+        <div class="portrait-orbit orbit-b" aria-hidden="true"></div>
+        <div class="portrait-glow" aria-hidden="true"></div>
+        <div class="portrait-frame">
+          <img src="assets/cyril-root.webp" alt="Portrait of Cyril Baaya" width="1254" height="1254">
+        </div>
+        <div class="portrait-signal" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <p class="portrait-hint">hover / move</p>
+      </div>
+
+      <div class="hero-status" aria-label="Current professional direction">
+        <span>01</span><p>Cybersecurity &amp; Networking</p><b>SOC → Security Engineering → Cloud Security</b>
+      </div>
+      <a class="scroll-cue" href="#projects">SCROLL <span>↓</span></a>
+    </section>
+
+    <section class="intro section-shell" aria-labelledby="intro-title">
+      <p class="section-kicker">PROFILE</p>
+      <div class="intro-grid">
+        <h2 id="intro-title">Security first.<br>Evidence over labels.</h2>
+        <div>
+          <p>My software builds are supporting evidence, not the headline. The focus is how I reason about security: triage, detection, packet analysis, incident workflow, offensive validation and defensible reporting.</p>
+          <p>Projects, labs and coursework sit together below because each demonstrates a different part of that competency.</p>
+        </div>
       </div>
     </section>
 
-    <section class="about-note" aria-labelledby="about-heading"><div class="shell"><span class="section-kicker">About me</span><h1 id="about-heading">Curiosity, put to work.</h1><p>I’m Cyril, a cybersecurity and networking student learning to turn careful investigation into dependable defence. I build, test and document what I learn—including what goes wrong.</p><p>My direction is clear: start in security operations, grow into security engineering, then specialise in cloud security. This is a record of that journey, and of the care I bring to the work.</p></div></section>
-
-    <section class="work-sequence" id="work" data-label="Selected work">
-      <div class="work-sticky">
-        <div class="work-heading"><span class="section-kicker">Software &amp; systems</span><h2>Builds</h2></div><div class="work-count"><b id="work-current">01</b> / 03</div>
-        <div class="work-track" id="work-track">
-          <article class="case-card" data-case="sirts"><div class="case-copy"><div><div class="case-status"><span>Team-based final-year system</span><span>Documented</span></div><h3>CCorp<br>SIRTS</h3><p>Incident and service-request workflows for a fictional SOC, with role-based views, lifecycle tracking and auditability.</p><div class="case-tags"><span>React</span><span>Supabase</span><span>PostgreSQL</span><span>RBAC</span></div></div><div class="case-actions"><button class="case-open" type="button">Open case file</button><a class="repo-link" href="https://github.com/cyr6x/ccorp-sirts" target="_blank" rel="noreferrer">Repository ↗</a></div></div><div class="case-visual topology" aria-hidden="true"><div class="visual-hud"><span>Incident routing</span><b>● online</b></div><div class="visual-core">INCIDENT</div><i class="vnode v1">INTAKE</i><i class="vnode v2">LEAD</i><i class="vnode v3">AUDIT</i><i class="vnode v4">ANALYST</i><div class="visual-foot"><span>roles 03</span><span>audit / lifecycle</span></div></div></article>
-          <article class="case-card" data-case="ctech"><div class="case-copy"><div><div class="case-status"><span>Pre-final-year software project</span><span>Full stack</span></div><h3>C TECH<br>IMS</h3><p>Inventory, order and supplier operations with reporting, user management and audit logging across one connected application.</p><div class="case-tags"><span>React</span><span>TypeScript</span><span>Node.js</span><span>PostgreSQL</span></div></div><div class="case-actions"><button class="case-open" type="button">Open case file</button><a class="repo-link" href="https://github.com/cyr6x/CTECH-IMS" target="_blank" rel="noreferrer">Repository ↗</a></div></div><div class="case-visual stack" aria-hidden="true"><div class="visual-hud"><span>System architecture</span><b>● available</b></div><div class="stack-layer">CLIENT</div><div class="stack-layer">API + OPERATIONS</div><div class="stack-layer">POSTGRES + AUDIT</div><div class="visual-foot"><span>users + audit</span><span>operations / reports</span></div></div></article>
+    <section class="projects" id="projects" aria-labelledby="projects-title">
+      <div class="section-shell project-head">
+        <div>
+          <p class="section-kicker">PROJECTS / LABS / COURSEWORK</p>
+          <h2 id="projects-title">Evidence in orbit.</h2>
         </div>
+        <p>Security work is prioritised. Coursework builds remain visible for breadth, without being framed as security achievements.</p>
+      </div>
+
+      <div class="filter-wrap section-shell" aria-label="Project filters">
+        <button class="filter is-active" type="button" data-filter="all">All evidence</button>
+        <button class="filter" type="button" data-filter="security">Security</button>
+        <button class="filter" type="button" data-filter="lab">Labs</button>
+        <button class="filter" type="button" data-filter="coursework">Coursework</button>
+      </div>
+
+      <div class="project-system section-shell" id="project-system">
+        <article class="project-card project-feature" data-kind="security coursework" data-project="sirts">
+          <div class="project-meta"><span>CAPSTONE · FINAL YEAR PROJECT</span><span>SECURITY</span></div>
+          <div class="project-body"><div><h3>CCorp SIRTS</h3><p>Security Incident Response &amp; Ticketing System: lifecycle tracking, role-based controls, auditability and incident workflow mapped around structured response practice.</p></div><div class="project-tags"><span>Incident response</span><span>RBAC</span><span>Audit logging</span><span>PostgreSQL</span></div></div>
+          <div class="project-actions"><button class="project-open" type="button">View evidence</button><a href="https://github.com/cyr6x/ccorp-sirts" target="_blank" rel="noreferrer">Repository ↗</a></div>
+          <div class="project-visual incident-map" aria-hidden="true"><i class="core"></i><i class="node n1"></i><i class="node n2"></i><i class="node n3"></i><i class="node n4"></i><span>INTAKE</span><span>TRIAGE</span><span>RESPONSE</span><span>AUDIT</span></div>
+        </article>
+
+        <article class="project-card" data-kind="security" data-project="sentinel">
+          <div class="project-meta"><span>DETECTION</span><span>SECURITY</span></div><h3>Azure SOC Honeypot</h3><p>Microsoft Sentinel detection pipeline with Windows telemetry, KQL enrichment, brute-force investigation and GeoIP visualisation.</p><div class="project-tags"><span>Sentinel</span><span>KQL</span><span>Azure</span><span>IOC analysis</span></div><div class="project-actions"><button class="project-open" type="button">View evidence</button><a href="https://github.com/cyr6x/azure-soc-honeypot" target="_blank" rel="noreferrer">Repository ↗</a></div>
+        </article>
+
+        <article class="project-card" data-kind="security lab" data-project="pcap">
+          <div class="project-meta"><span>NETWORK FORENSICS</span><span>LAB</span></div><h3>Malware Traffic Analysis</h3><p>PCAP investigation tracing beacon behaviour, extracting IOCs and mapping activity to MITRE ATT&amp;CK.</p><div class="project-tags"><span>Wireshark</span><span>PCAP</span><span>MITRE ATT&amp;CK</span></div><div class="project-actions"><button class="project-open" type="button">View evidence</button><a href="https://github.com/cyr6x/wireshark-traffic-analysis" target="_blank" rel="noreferrer">Repository ↗</a></div>
+        </article>
+
+        <article class="project-card" data-kind="security lab" data-project="burp">
+          <div class="project-meta"><span>WEB SECURITY</span><span>LAB</span></div><h3>Web Application Testing</h3><p>Controlled SQL injection and reflected XSS testing with exploitation evidence and remediation notes.</p><div class="project-tags"><span>Burp Suite</span><span>DVWA</span><span>SQLi</span><span>XSS</span></div><div class="project-actions"><button class="project-open" type="button">View evidence</button><a href="https://github.com/cyr6x/burpsuite-web-testing-lab" target="_blank" rel="noreferrer">Repository ↗</a></div>
+        </article>
+
+        <article class="project-card" data-kind="security lab" data-project="nmap">
+          <div class="project-meta"><span>ENUMERATION</span><span>LAB</span></div><h3>Nmap Enumeration</h3><p>Host discovery, service enumeration, fingerprinting and exposure analysis in controlled environments.</p><div class="project-tags"><span>Nmap</span><span>TCP/IP</span><span>Service discovery</span></div><div class="project-actions"><button class="project-open" type="button">View evidence</button></div>
+        </article>
+
+        <article class="project-card" data-kind="security lab" data-project="metasploit">
+          <div class="project-meta"><span>EXPLOITATION</span><span>LAB</span></div><h3>Metasploit Validation</h3><p>Controlled exploitation, privilege validation and remediation evidence against deliberately vulnerable targets.</p><div class="project-tags"><span>Metasploit</span><span>Linux</span><span>CVE research</span></div><div class="project-actions"><button class="project-open" type="button">View evidence</button></div>
+        </article>
+
+        <article class="project-card" data-kind="security lab" data-project="recon">
+          <div class="project-meta"><span>RECONNAISSANCE</span><span>LAB</span></div><h3>Passive Recon &amp; OSINT</h3><p>Asset discovery and evidence gathering using passive reconnaissance and subdomain-enumeration techniques.</p><div class="project-tags"><span>OSINT</span><span>theHarvester</span><span>Subdomains</span></div><div class="project-actions"><button class="project-open" type="button">View evidence</button></div>
+        </article>
+
+        <article class="project-card" data-kind="security coursework" data-project="network">
+          <div class="project-meta"><span>NETWORK DEFENCE</span><span>COURSEWORK</span></div><h3>Network Security &amp; Defence</h3><p>Technical coursework covering segmentation, secure architecture, firewall policy, network services and control rationale.</p><div class="project-tags"><span>Segmentation</span><span>Firewalls</span><span>Architecture</span><span>Azure</span></div><div class="project-actions"><button class="project-open" type="button">View evidence</button></div>
+        </article>
+
+        <article class="project-card" data-kind="coursework" data-project="simulator">
+          <div class="project-meta"><span>LEARNING SYSTEM</span><span>COURSEWORK / BUILD</span></div><h3>Security+ MCQ × PBQ Simulator</h3><p>Scenario-led exam practice system built to reproduce timed Security+ conditions, review weak areas and train exam discipline.</p><div class="project-tags"><span>Security+ SY0-701</span><span>PBQ practice</span><span>Analytics</span></div><div class="project-actions"><button class="project-open" type="button">View evidence</button><a href="https://mcq-x-pbq-sim.vercel.app/" target="_blank" rel="noreferrer">Live system ↗</a></div>
+        </article>
+
+        <article class="project-card coursework-only" data-kind="coursework" data-project="ims">
+          <div class="project-meta"><span>APPLICATION COURSEWORK</span><span>NON-SECURITY</span></div><h3>C TECH IMS</h3><p>An inventory-management coursework project demonstrating systems analysis, data handling and application delivery. It is included as coursework evidence; it does not solve a cybersecurity problem.</p><div class="project-tags"><span>Systems analysis</span><span>SQL</span><span>PostgreSQL</span><span>Reporting</span></div><div class="project-actions"><button class="project-open" type="button">View evidence</button><a href="https://github.com/cyr6x/CTECH-IMS" target="_blank" rel="noreferrer">Repository ↗</a></div>
+        </article>
       </div>
     </section>
 
-    <section class="investigations" id="investigations" data-label="Cases"><div class="shell"><div class="evidence-head reveal"><span class="section-kicker">Security analysis</span><h2 class="section-title">Investigations</h2><p class="section-copy">Evidence-led work that follows telemetry and network behaviour from observation to a defensible conclusion.</p></div><div class="investigation-grid reveal"><article data-case="sentinel"><span>CASE 01</span><h3>Azure Sentinel Detection</h3><p>Windows authentication telemetry, KQL enrichment and an investigation path in Microsoft Sentinel.</p><button class="case-open" type="button">Open case file</button></article><article data-case="pcap"><span>CASE 02</span><h3>PCAP Traffic Analysis</h3><p>DHCP, DNS and HTTP traffic investigated through filters, indicators and corroborating evidence.</p><button class="case-open" type="button">Open case file</button></article></div></div></section>
+    <section class="profile section-shell" id="profile" aria-labelledby="profile-title">
+      <div class="profile-head"><p class="section-kicker">TECHNICAL PROFILE</p><h2 id="profile-title">Capabilities, correctly grouped.</h2><p>Tools sit where they are actually used. Security operations and networking remain the centre of gravity.</p></div>
+      <div class="skill-grid">
+        <article class="skill-panel"><div class="skill-number">01</div><h3>Security Operations &amp; Incident Response</h3><ul><li><span>Alert triage &amp; investigation</span><b>Applied</b></li><li><span>Microsoft Sentinel</span><b>Practised</b></li><li><span>NIST SP 800-61 workflow</span><b>Applied</b></li><li><span>RBAC &amp; audit logging</span><b>Built</b></li><li><span>IOC identification</span><b>Applied</b></li></ul><p>Evidence: Sentinel pipeline, SIRTS capstone, incident and malware investigations.</p></article>
+        <article class="skill-panel"><div class="skill-number">02</div><h3>Detection Engineering &amp; Scripting</h3><ul><li><span>KQL query development</span><b>Practised</b></li><li><span>Python</span><b>Building</b></li><li><span>Log enrichment</span><b>Applied</b></li><li><span>MITRE ATT&amp;CK mapping</span><b>Applied</b></li><li><span>Detection logic &amp; tuning</span><b>Building</b></li></ul><p>Evidence: Sentinel detections, enrichment queries and investigation workflows.</p></article>
+        <article class="skill-panel"><div class="skill-number">03</div><h3>Network Security &amp; Analysis</h3><ul><li><span>Wireshark / PCAP analysis</span><b>Applied</b></li><li><span>TCP/IP &amp; routing</span><b>Foundation</b></li><li><span>Segmentation &amp; DMZ design</span><b>Designed</b></li><li><span>Firewall policy</span><b>Practised</b></li><li><span>Nmap enumeration</span><b>Applied</b></li></ul><p>Evidence: malware traffic analysis, network-defence coursework and enumeration labs.</p></article>
+        <article class="skill-panel"><div class="skill-number">04</div><h3>Offensive Security &amp; Validation</h3><ul><li><span>Burp Suite</span><b>Applied</b></li><li><span>Metasploit</span><b>Applied</b></li><li><span>SQLi / XSS validation</span><b>Applied</b></li><li><span>Privilege escalation</span><b>Practised</b></li><li><span>CVE research</span><b>Practised</b></li></ul><p>Evidence: controlled web, exploitation and remediation labs.</p></article>
+        <article class="skill-panel platforms"><div class="skill-number">05</div><h3>Platforms &amp; Working Environment</h3><div class="platform-row"><span>Azure</span><span>Linux</span><span>Git / GitHub</span><span>PostgreSQL</span><span>SQL</span><span>VirusTotal</span></div><p>Supporting platforms used across security investigations, lab environments and coursework systems.</p></article>
+      </div>
+    </section>
 
-    <section class="archive" id="archive" data-label="Evidence"><div class="shell"><div class="archive-head reveal"><div><span class="section-kicker">Coursework &amp; practice</span><h2 class="section-title">Labs &amp; reports</h2></div><p class="section-copy">Controlled practical work and academic deliverables, each kept separate from software builds and investigation cases.</p></div><div class="archive-groups reveal"><div><h3>Security labs</h3><div class="archive-list"><button class="lab-row" type="button" data-case="ethical"><span class="num">L-01</span><h4>Ethical Hacking</h4><p>Web, services, forensics and privilege-escalation exercises.</p><span class="arrow">↗</span></button><button class="lab-row" type="button" data-case="nmap"><span class="num">L-02</span><h4>Nmap Enumeration</h4><p>Discovery, service enumeration and fingerprinting.</p><span class="arrow">↗</span></button><button class="lab-row" type="button" data-case="burp"><span class="num">L-03</span><h4>Burp Suite Web Testing</h4><p>SQL injection and XSS in a controlled environment.</p><span class="arrow">↗</span></button><button class="lab-row" type="button" data-case="metasploit"><span class="num">L-04</span><h4>Metasploit Exploitation</h4><p>Controlled exploitation and remediation evidence.</p><span class="arrow">↗</span></button><button class="lab-row" type="button" data-case="password"><span class="num">L-05</span><h4>Password Auditing</h4><p>Credential strength and password-security practice.</p><span class="arrow">↗</span></button><button class="lab-row" type="button" data-case="recon"><span class="num">L-06</span><h4>Passive Reconnaissance</h4><p>Research, asset discovery and evidence handling.</p><span class="arrow">↗</span></button></div></div><div><h3>Coursework reports</h3><div class="archive-list"><button class="lab-row" type="button" data-case="network"><span class="num">R-01</span><h4>Network Security &amp; Defence</h4><p>Network design, segmentation, DMZs and control rationale.</p><span class="arrow">↗</span></button><button class="lab-row" type="button" data-case="ctech"><span class="num">R-02</span><h4>Systems Development Evidence</h4><p>Architecture, testing and delivery notes from C TECH IMS.</p><span class="arrow">↗</span></button><button class="lab-row" type="button" data-case="sirts"><span class="num">R-03</span><h4>Final-year Project Evidence</h4><p>Collaborative system documentation, testing and reflection.</p><span class="arrow">↗</span></button></div></div></div></div></section>
+    <section class="path" id="path" aria-labelledby="path-title">
+      <div class="section-shell path-grid">
+        <div class="path-copy"><p class="section-kicker">DIRECTION</p><h2 id="path-title">Cybersecurity &amp; networking.<br>Then deeper.</h2><p>BSc (Hons) Cybersecurity &amp; Networking in progress. The near-term focus is operational competence: Security+, SOC investigation depth, KQL and network evidence. The longer path moves through security engineering into cloud security.</p></div>
+        <ol class="path-steps">
+          <li><span>NOW</span><div><h3>Finish the degree + Security+</h3><p>Strengthen core security, networking and incident-response fundamentals.</p></div></li>
+          <li><span>01</span><div><h3>SOC / Cybersecurity Analyst</h3><p>Build reliable triage, investigation, reporting and escalation habits.</p></div></li>
+          <li><span>02</span><div><h3>Security Engineering</h3><p>Engineer controls and detections from operational evidence.</p></div></li>
+          <li><span>03</span><div><h3>Cloud Security</h3><p>Specialise in cloud identity, workload protection, logging and secure architecture.</p></div></li>
+        </ol>
+      </div>
+    </section>
 
-    <section class="arsenal" id="arsenal" data-label="Skills"><div class="shell"><div class="arsenal-head reveal"><span class="section-kicker">Skills &amp; tools</span><h2 class="section-title">Technical profile</h2><p class="section-copy">Capabilities supported by projects, labs and documented practice.</p></div><div class="skill-deck" id="skill-deck"><article class="skill-card"><div class="skill-code"><span>SEC-OPS</span><span>01</span></div><h3>Security Operations</h3><ul class="competencies"><li>Alert triage <span>Applied</span></li><li>Log analysis <span>Applied</span></li><li>Incident workflow <span>Built</span></li><li>Threat detection <span>Building</span></li></ul><p class="skill-evidence"><b>Evidence</b>Sentinel lab, SIRTS workflows, investigation reports</p></article><article class="skill-card"><div class="skill-code"><span>TOOLING</span><span>02</span></div><h3>Tools &amp; Platforms</h3><ul class="competencies"><li>Microsoft Sentinel <span>Practised</span></li><li>KQL <span>Practised</span></li><li>Wireshark <span>Applied</span></li><li>Nmap / Burp <span>Applied</span></li></ul><p class="skill-evidence"><b>Evidence</b>Queries, packet captures, scan and web-testing reports</p></article><article class="skill-card"><div class="skill-code"><span>NET-ENG</span><span>03</span></div><h3>Network &amp; Infrastructure</h3><ul class="competencies"><li>TCP/IP &amp; routing <span>Foundation</span></li><li>Segmentation <span>Designed</span></li><li>Firewall policy <span>Practised</span></li><li>Hardening <span>Applied</span></li></ul><p class="skill-evidence"><b>Evidence</b>Network defence exercises and architecture diagrams</p></article><article class="skill-card"><div class="skill-code"><span>DEV-SEC</span><span>04</span></div><h3>Engineering</h3><ul class="competencies"><li>JavaScript / TypeScript <span>Built</span></li><li>React / REST <span>Built</span></li><li>PostgreSQL <span>Applied</span></li><li>Linux <span>Practised</span></li></ul><p class="skill-evidence"><b>Evidence</b>Operational systems, security tooling and lab environments</p></article></div></div></section>
-
-    <section class="degree" id="roadmap" data-label="Roadmap"><div class="shell degree-grid"><div class="degree-copy reveal"><span class="section-kicker">Education &amp; roadmap</span><h2>BSc (Hons)<br>Cybersecurity &amp; Networking</h2><p class="degree-status">In progress · Honours degree</p><p>My studies connect networks, systems and security decisions. Practical labs and written reports have taught me to investigate a problem, weigh the evidence and explain a defensible solution.</p><dl class="education-detail"><dt>What I study</dt><dd>Network defence, ethical hacking, cloud security and cybersecurity management.</dd><dt>How I learn</dt><dd>Build systems, test assumptions, analyse traffic and document both results and limitations.</dd><dt>Evidence</dt><dd>Technical reports, network designs, investigation labs and collaborative final-year project work.</dd></dl><a class="pill" href="#archive">Explore academic work ↗</a></div><div class="degree-panel"><article class="degree-line reveal"><span class="when">Now → March 2027</span><h3>Finish the degree. Build operational depth.</h3><p>Complete the BSc, Security+ and SC-200 while deepening KQL, endpoint, identity and incident fundamentals.</p><div class="proof"><span>BSc</span><span>Security+</span><span>SC-200</span></div></article><article class="degree-line reveal"><span class="when">Stage 1</span><h3>SOC / Security Operations</h3><p>Build reliable triage, clear incident reports and sound investigation habits through operational experience. Deepen practical analysis with HTB CDSA.</p><div class="proof"><span>SOC Analyst</span><span>Security Analyst</span><span>CDSA goal</span></div></article><article class="degree-line reveal"><span class="when">Stage 2</span><h3>Security Engineering</h3><p>Turn operational lessons into better controls: automate repeatable work, engineer detections and build security into delivery pipelines.</p><div class="proof"><span>SecOps Engineer</span><span>Security Engineer</span></div></article><article class="degree-line reveal"><span class="when">Stage 3</span><h3>Cloud Security Engineering</h3><p>Specialise in cloud controls, identity, workload protection, logging and secure architecture from an engineering foundation.</p><div class="proof"><span>Cloud Security</span><span>Azure / Entra</span><span>IaC</span></div></article></div></div></section>
-
-    <section class="contact" id="contact" data-label="Contact"><div class="shell"><div class="contact-card reveal"><div><span class="section-kicker">Contact</span><h2>CYRIL<br><span>BAAYA.</span></h2></div><div class="contact-side"><p>Focused on SOC, security engineering and cloud-security opportunities where careful investigation and practical engineering matter.</p><a class="pill" href="https://www.linkedin.com/in/cyril-b-0b35bb23a" target="_blank" rel="noreferrer"><span>LinkedIn</span><span>↗</span></a><a class="pill" href="https://github.com/cyr6x" target="_blank" rel="noreferrer"><span>GitHub</span><span>↗</span></a></div></div></div></section>
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="planet-stage" aria-hidden="true"><div class="planet-grid"></div><div class="planet-ring ring-a"></div><div class="planet-ring ring-b"></div></div>
+      <div class="contact-content">
+        <p class="section-kicker">RETURN TO SPACE / CONTACT</p>
+        <h2 id="contact-title">Open a channel.</h2>
+        <p>Cybersecurity analyst · networking · security operations.</p>
+        <div class="contact-links">
+          <button class="contact-reveal" type="button" data-contact="email"><span>Email</span><b>Click to reveal</b></button>
+          <button class="contact-reveal" type="button" data-contact="phone"><span>Phone</span><b>Click to reveal</b></button>
+          <a href="https://www.linkedin.com/in/cyril-b-0b35bb23a" target="_blank" rel="noreferrer"><span>LinkedIn</span><b>Open ↗</b></a>
+          <a href="https://github.com/cyr6x" target="_blank" rel="noreferrer"><span>GitHub</span><b>Open ↗</b></a>
+        </div>
+        <p class="contact-location">Nairobi, Kenya</p>
+      </div>
+    </section>
   </main>
 
-  <footer><div class="shell footer-inner"><span>© <span id="year">2026</span> Cyril Baaya / remote-ready</span><div class="footer-links"><a href="#identity">About</a><a href="#work">Projects</a><a href="#arsenal">Skills</a></div></div></footer>
+  <footer><span>© <span id="year">2026</span></span><span>Cybersecurity · Networking · Evidence</span></footer>
 
-  <dialog id="case-dialog"><div class="case-dialog-head"><span>Case file / verified context</span><button class="dialog-close" type="button" aria-label="Close case file">×</button></div><div class="case-dialog-body" id="dialog-body"></div></dialog>
+  <dialog id="project-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-top"><span>PROJECT EVIDENCE</span><button type="button" class="dialog-close" aria-label="Close project details">×</button></div>
+    <div id="dialog-body"></div>
+  </dialog>
 </body>
 </html>
